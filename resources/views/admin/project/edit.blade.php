@@ -38,9 +38,9 @@ Portfolio | Project Edit
         <input type="text" name="client" id="client" class="form-control" value="{{old ('client') ?? $project->client }}">
     </div>
     <div class="form-group mb-3">
-        <label for="img" class="form-label @error('img') is-invalid @enderror">Img</label>
+        <label for="img" class="form-label @error('image') is-invalid @enderror">image</label>
 
-        <input type="file" name="img" id="img" class="form-control">
+        <input type="file" name="image" id="img" class="form-control">
     </div>
 
     <div class="form-group mb-3">

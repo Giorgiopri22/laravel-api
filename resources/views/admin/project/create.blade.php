@@ -31,15 +31,11 @@ Portfolio | Project Create
         @enderror
         <textarea name="description" id="description" class="form-control" rows="5"></textarea>
     </div>
+  
     <div class="form-group mb-3">
-        <label for="client" class="form-label @error('client') is-invalid @enderror">Client</label>
-        
-        <input type="text" name="client" id="client" class="form-control">
-    </div>
-    <div class="form-group mb-3">
-        <label for="img" class="form-label @error('img') is-invalid @enderror">Img</label>
+        <label for="img" class="form-label">image</label>
 
-        <input type="file" name="img" id="img" class="form-control">
+        <input type="file" name="image" id="img" class="form-control">
     </div>
 
     <div class="form-group mb-3">

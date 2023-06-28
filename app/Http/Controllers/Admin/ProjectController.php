@@ -47,7 +47,7 @@ class ProjectController extends Controller
             [
                 'name' => 'required|unique:projects',
                 'description' => 'required',
-                'img' => 'nullable|image',
+                'image' => 'nullable|image',
                 'type_id' => 'nullable|exists:types,id',
                 'technologies' => 'exists:technologies,id'
             ],
@@ -61,9 +61,11 @@ class ProjectController extends Controller
 
         $form_data = $request->all();
 
-        if($request->hasFile('img')){
-            $path = Storage::disk('public')->put('project_images', $request->img);
-            $form_data['img'] = $path;
+        if($request->hasFile('image')){
+            $path = Storage::disk('public')->put('project_images', $request->image);
+            $form_data['image'] = $path;
+        }else{
+            $form_data['image'] = "";
         }
 
 
@@ -125,7 +127,7 @@ class ProjectController extends Controller
             [
                 'name' => 'required',
                 'description' => 'required',
-                'img' => 'nullable|image',
+                'image' => 'nullable|image',
                 'type_id' => 'nullable|exists:types,id',
                 'technologies' => 'exists:technologies,id'
             ],
@@ -139,12 +141,12 @@ class ProjectController extends Controller
 
         $form_data = $request->all();
 
-        if($request->hasFile('img')){
-            if( $project->img ){
-                Storage::delete($project->img);
+        if($request->hasFile('image')){
+            if( $project->image ){
+                Storage::delete($project->image);
             }
-            $path = Storage::disk('public')->put('project_images', $request->img);
-            $form_data['img'] = $path;
+            $path = Storage::disk('public')->put('project_images', $request->image);
+            $form_data['image'] = $path;
         }
 
         $slug = Project::generateSlug($request->name);
