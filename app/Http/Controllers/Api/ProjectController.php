@@ -8,9 +8,20 @@ use App\Models\Admin\Project;
 
 class ProjectController extends Controller
 {
-    public function index(){
-        $projects = Project::with('type','technologies')->get();
-        return response()->json([
+    public function index(Request $request){
+        $query = Project::with(['type','technologies']);
+        if ($request->has('type_id')){
+            $query->where('type_id', $request->type_id);
+        }
+        if($request->has('technologies_ids')){
+            $technologyIds = explode(',', $request->technologies_ids);
+            $query->whereHas('technologies', function($query) use ($technologyIds){
+                $query->whereIn('id', $technologyIds);
+            });
+        }
+
+        $projects = $query->paginate(2);
+            return response()->json([
             'success' => true,
             'projects' => $projects
         ]);
